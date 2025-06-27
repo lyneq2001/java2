@@ -1,22 +1,22 @@
-# Library Management
+# Zarzadzanie Biblioteka
 
-This module is a Spring Boot application that provides a simple online library system. It demonstrates user registration, login and a basic catalog of books.
+Ten moduł to aplikacja Spring Boot, która udostępnia prosty system biblioteczny online. Pokazuje rejestrację użytkowników, logowanie oraz podstawowy katalog książek.
 
-## Running the application
+## Uruchamianie aplikacji
 
-Ensure you have Java 17 and Maven installed. From this directory run:
+Upewnij się, że masz zainstalowaną Javę 17 oraz Mavena. Z tego katalogu uruchom:
 
 ```bash
 mvn spring-boot:run
 ```
 
-By default the application connects to a PostgreSQL database `librarydb` on `localhost`. Adjust the connection settings in `src/main/resources/application.yml` if needed.
+Domyślnie aplikacja łączy się z bazą danych PostgreSQL `librarydb` na `localhost`. W razie potrzeby dostosuj ustawienia w pliku `src/main/resources/application.yml`.
 
-## Database schema
+## Schemat bazy danych
 
-The schema is initialized automatically from `src/main/resources/schema.sql` when the application starts. This script creates the necessary tables and inserts a few example books.
+Schemat jest inicjalizowany automatycznie z `src/main/resources/schema.sql` podczas startu. Skrypt tworzy niezbędne tabele i dodaje kilka przykładowych książek.
 
-## Demo credentials
+## Dane demo
 
 - **Admin:** `admin` / `admin123`
-- **User:** `john_doe` / `user123`
+- **Użytkownik:** `john_doe` / `user123`

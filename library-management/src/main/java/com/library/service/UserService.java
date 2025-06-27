@@ -30,11 +30,11 @@ public class UserService {
         logger.info("Attempting to register user: {}", username);
 
         if (userRepository.existsByUsername(username)) {
-            throw new RuntimeException("Username already exists: " + username);
+            throw new RuntimeException("Nazwa uzytkownika juz istnieje: " + username);
         }
 
         if (userRepository.existsByEmail(email)) {
-            throw new RuntimeException("Email already exists: " + email);
+            throw new RuntimeException("Email juz istnieje: " + email);
         }
 
         User user = new User();
@@ -65,7 +65,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono uzytkownika o ID: " + id));
     }
 
     @Transactional(readOnly = true)

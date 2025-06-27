@@ -23,7 +23,7 @@ public class BookService {
     @Transactional(readOnly = true)
     public Book getBook(Long id) {
         return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono ksiazki"));
     }
 
     @Transactional(readOnly = true)
