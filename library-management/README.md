@@ -18,5 +18,5 @@ Schemat jest inicjalizowany automatycznie z `src/main/resources/schema.sql` podc
 
 ## Dane demo
 
-- **Admin:** `admin` / `admin123`
-- **Użytkownik:** `john_doe` / `user123`
+- **Admin:** `Fabian` / `Fabian123`
+- **Użytkownik:** `Anna` / `Anna123`
