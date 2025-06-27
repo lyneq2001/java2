@@ -45,11 +45,25 @@ public class RentalService {
         Rental saved = rentalRepository.save(rental);
 
         book.setQuantity(book.getQuantity() - 1);
-        if (book.getQuantity() <= 0) {
-            book.setAvailable(false);
-        }
         bookRepository.save(book);
 
         return saved;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Rental> findAll() {
+        return rentalRepository.findAll();
+    }
+
+    public void markReturned(Long rentalId) {
+        Rental rental = rentalRepository.findById(rentalId)
+                .orElseThrow(() -> new RuntimeException("Rental not found"));
+        if (rental.getReturnedDate() == null) {
+            rental.setReturnedDate(LocalDate.now());
+            rentalRepository.save(rental);
+            Book book = rental.getBook();
+            book.setQuantity(book.getQuantity() + 1);
+            bookRepository.save(book);
+        }
     }
 }
