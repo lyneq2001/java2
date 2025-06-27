@@ -60,6 +60,7 @@ public class HomeController {
         Book book = bookService.getBook(id);
         model.addAttribute("book", book);
         model.addAttribute("pageTitle", "Book Details");
+        model.addAttribute("reviews", reviewService.findByBook(book));
 
         if (authentication != null && authentication.isAuthenticated()) {
             String username = authentication.getName();

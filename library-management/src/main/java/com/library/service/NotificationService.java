@@ -27,6 +27,11 @@ public class NotificationService {
     }
 
     @Transactional(readOnly = true)
+    public List<Notification> getUnreadNotifications(User user) {
+        return notificationRepository.findByUserAndReadFalseOrderByCreatedDateDesc(user);
+    }
+
+    @Transactional(readOnly = true)
     public long countUnread(User user) {
         return notificationRepository.countByUserAndReadFalse(user);
     }
@@ -38,5 +43,9 @@ public class NotificationService {
                 notificationRepository.save(n);
             }
         });
+    }
+
+    public void deleteNotification(Long id) {
+        notificationRepository.deleteById(id);
     }
 }

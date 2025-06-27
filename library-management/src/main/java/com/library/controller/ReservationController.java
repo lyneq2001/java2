@@ -44,4 +44,21 @@ public class ReservationController {
         }
         return "redirect:/books/" + bookId + "/details";
     }
+
+    @PostMapping("/reservations/{id}/cancel")
+    public String cancelReservation(@PathVariable Long id,
+                                    Authentication authentication,
+                                    RedirectAttributes redirectAttributes) {
+        if (authentication == null) {
+            return "redirect:/login";
+        }
+        User user = (User) authentication.getPrincipal();
+        try {
+            reservationService.cancelReservation(id, user);
+            redirectAttributes.addFlashAttribute("successMessage", "Reservation cancelled");
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+        }
+        return "redirect:/reservations";
+    }
 }

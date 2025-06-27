@@ -33,4 +33,37 @@ public class ReservationService {
         Reservation reservation = new Reservation(user, book);
         return reservationRepository.save(reservation);
     }
+
+    @Transactional(readOnly = true)
+    public List<Reservation> findAll() {
+        return reservationRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Reservation getReservation(Long id) {
+        return reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+    }
+
+    public Reservation updateReservation(Long id, Reservation updated) {
+        Reservation existing = reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+        existing.setBook(updated.getBook());
+        existing.setUser(updated.getUser());
+        existing.setReservationDate(updated.getReservationDate());
+        return reservationRepository.save(existing);
+    }
+
+    public void deleteReservation(Long id) {
+        reservationRepository.deleteById(id);
+    }
+
+    public void cancelReservation(Long id, User user) {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+        if (!reservation.getUser().equals(user)) {
+            throw new RuntimeException("Unauthorized");
+        }
+        reservationRepository.delete(reservation);
+    }
 }

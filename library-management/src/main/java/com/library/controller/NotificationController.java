@@ -20,9 +20,10 @@ public class NotificationController {
         String redirect = "/";
         if (authentication != null) {
             User user = (User) authentication.getPrincipal();
-            for (Notification n : notificationService.getNotifications(user)) {
+            for (Notification n : notificationService.getUnreadNotifications(user)) {
                 if (n.getId().equals(id)) {
                     notificationService.markAsRead(id);
+                    notificationService.deleteNotification(id);
                     if (n.getLink() != null && !n.getLink().isBlank()) {
                         redirect = n.getLink();
                     }
