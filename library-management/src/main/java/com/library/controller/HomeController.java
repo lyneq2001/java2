@@ -67,10 +67,11 @@ public class HomeController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Authentication authentication) {
-        String username = authentication.getName();
-        User user = userService.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
 
+        User user = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
         model.addAttribute("pageTitle", "Dashboard");
 
