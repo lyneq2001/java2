@@ -63,6 +63,7 @@
                     <p class="text-muted">No books found.</p>
                 </div>
                 <div th:each="book : ${books}" class="col-md-6 col-lg-4 mb-4">
+                    <a th:href="@{'/books/' + ${book.id} + '/details'}" class="text-decoration-none text-dark">
                     <div class="card book-card h-100">
                         <div class="book-cover bg-light d-flex align-items-center justify-content-center">
                             <i class="bi bi-book display-4 text-muted"></i>
@@ -76,12 +77,11 @@
                                 <span class="ms-2 text-muted small">(
                                     <span th:text="${book.quantity}">0</span> left)
                                 </span>
-                                <a th:href="@{'/books/' + ${book.id} + '/details'}" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i> Details
-                                </a>
+                                
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
             </div>
 

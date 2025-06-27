@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Manage Reservations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container my-5">
+    <h1 class="h4 mb-4" th:text="${pageTitle}">Manage Reservations</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Book</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${reservations}">
+            <td th:text="${r.id}"></td>
+            <td th:text="${r.user.username}"></td>
+            <td th:text="${r.book.title}"></td>
+            <td th:text="${#temporals.format(r.reservationDate,'yyyy-MM-dd')}"></td>
+            <td>
+                <a th:href="@{'/admin/reservations/' + ${r.id} + '/edit'}" class="btn btn-sm btn-primary">Edit</a>
+                <form th:action="@{'/admin/reservations/' + ${r.id} + '/delete'}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete reservation?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

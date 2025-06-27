@@ -20,12 +20,18 @@
             <tr>
                 <th>Book</th>
                 <th>Reservation Date</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="r : ${reservations}">
                 <td th:text="${r.book.title}">Title</td>
                 <td th:text="${#temporals.format(r.reservationDate, 'yyyy-MM-dd')}">date</td>
+                <td>
+                    <form th:action="@{'/reservations/' + ${r.id} + '/cancel'}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

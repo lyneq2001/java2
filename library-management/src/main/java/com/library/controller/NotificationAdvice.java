@@ -18,7 +18,7 @@ public class NotificationAdvice {
     public void addNotifications(Model model, Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
             User user = (User) authentication.getPrincipal();
-            model.addAttribute("notifications", notificationService.getNotifications(user));
+            model.addAttribute("notifications", notificationService.getUnreadNotifications(user));
             model.addAttribute("unreadCount", notificationService.countUnread(user));
         }
     }
