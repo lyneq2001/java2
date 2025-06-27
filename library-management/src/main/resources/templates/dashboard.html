@@ -147,7 +147,7 @@
                         <div class="list-group-item d-flex justify-content-between align-items-start border-0 px-0" th:each="v : ${recentBooks}">
                             <div class="me-auto">
                                 <div class="fw-bold" th:text="${v.book.title}">Title</div>
-                                <small class="text-muted" th:text="${#dates.format(v.viewedDate, 'yyyy-MM-dd HH:mm')}">date</small>
+                                <small class="text-muted" th:text="${#temporals.format(v.viewedDate, 'yyyy-MM-dd HH:mm')}">date</small>
                             </div>
                         </div>
                     </div>
@@ -180,8 +180,8 @@
                             <tr th:each="r : ${currentRentals}">
                                 <td><strong th:text="${r.book.title}">Title</strong></td>
                                 <td th:text="${r.book.author}">Author</td>
-                                <td th:text="${#dates.format(r.rentedDate, 'yyyy-MM-dd')}">date</td>
-                                <td th:text="${#dates.format(r.dueDate, 'yyyy-MM-dd')}">date</td>
+                                <td th:text="${#temporals.format(r.rentedDate, 'yyyy-MM-dd')}">date</td>
+                                <td th:text="${#temporals.format(r.dueDate, 'yyyy-MM-dd')}">date</td>
                                 <td>
                                     <span th:classappend="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'badge bg-danger' : 'badge bg-success'" th:text="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'Overdue' : 'On Time'">Status</span>
                                 </td>

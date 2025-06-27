@@ -25,7 +25,7 @@
             <tbody>
             <tr th:each="r : ${reservations}">
                 <td th:text="${r.book.title}">Title</td>
-                <td th:text="${#dates.format(r.reservationDate, 'yyyy-MM-dd')}">date</td>
+                <td th:text="${#temporals.format(r.reservationDate, 'yyyy-MM-dd')}">date</td>
             </tr>
             </tbody>
         </table>

@@ -26,8 +26,8 @@
             <tbody>
             <tr th:each="r : ${rentals}">
                 <td th:text="${r.book.title}">Title</td>
-                <td th:text="${#dates.format(r.rentedDate, 'yyyy-MM-dd')}">date</td>
-                <td th:text="${#dates.format(r.dueDate, 'yyyy-MM-dd')}">date</td>
+                <td th:text="${#temporals.format(r.rentedDate, 'yyyy-MM-dd')}">date</td>
+                <td th:text="${#temporals.format(r.dueDate, 'yyyy-MM-dd')}">date</td>
             </tr>
             </tbody>
         </table>

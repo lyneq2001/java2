@@ -32,6 +32,11 @@
             </div>
             <button type="submit" class="btn btn-primary" th:disabled="${book.quantity == 0}">Rent</button>
         </form>
+
+        <form th:action="@{/reservations/reserve}" method="post" class="mt-3" th:if="${book.quantity == 0}">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button type="submit" class="btn btn-warning">Reserve</button>
+        </form>
     </div>
     <a th:href="@{/books}" class="btn btn-secondary">Back to list</a>
 </div>
