@@ -53,10 +53,8 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush" th:if="${books}" style="max-height: 200px; overflow-y: auto;">
-                        <li class="list-group-item" th:each="b, iter : ${books}" th:if="${iter.index} &lt; 3">
+                        <li class="list-group-item" th:each="b : ${books}">
                             <a th:href="@{'/books/' + ${b.id} + '/details'}" th:text="${b.title} + ' by ' + ${b.author}">Book</a>
-                        </li>
-                        <li class="list-group-item text-center text-muted" th:if="${books.size()} > 3">...
                         </li>
                     </ul>
                 </div>
