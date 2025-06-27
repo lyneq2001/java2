@@ -37,7 +37,7 @@ public class RentalService {
 
     @Transactional(readOnly = true)
     public Rental getRental(Long id) {
-        return rentalRepository.findById(id).orElseThrow(() -> new RuntimeException("Rental not found"));
+        return rentalRepository.findById(id).orElseThrow(() -> new RuntimeException("Nie znaleziono wypozyczenia"));
     }
 
     public Rental saveRental(Rental rental) {
@@ -56,7 +56,7 @@ public class RentalService {
 
     public Rental rentBook(User user, Book book, int weeks) {
         if (!book.isAvailable() || book.getQuantity() <= 0) {
-            throw new RuntimeException("Book not available");
+            throw new RuntimeException("Ksiazka niedostepna");
         }
 
         Rental rental = new Rental(user, book, LocalDate.now(), LocalDate.now().plusWeeks(weeks));
@@ -75,7 +75,7 @@ public class RentalService {
 
     public void markReturned(Long rentalId) {
         Rental rental = rentalRepository.findById(rentalId)
-                .orElseThrow(() -> new RuntimeException("Rental not found"));
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono wypozyczenia"));
         if (rental.getReturnedDate() == null) {
             rental.setReturnedDate(LocalDate.now());
             rentalRepository.save(rental);
@@ -92,7 +92,7 @@ public class RentalService {
                 bookRepository.save(book);
                 reservationRepository.delete(first);
                 notificationService.createNotification(first.getUser(),
-                        "Reservation for " + book.getTitle() + " has been converted to rental", "/rentals");
+                        "Rezerwacja na ksiazke " + book.getTitle() + " zostala zamieniona na wypozyczenie", "/rentals");
             }
         }
     }

@@ -60,20 +60,20 @@ public class AuthController {
 
         // Check if passwords match
         if (!password.equals(confirmPassword)) {
-            model.addAttribute("errorMessage", "Passwords do not match");
+            model.addAttribute("errorMessage", "Hasla nie sa takie same");
             return "auth/register";
         }
 
         try {
             // Check if username is available
             if (!userService.isUsernameAvailable(username)) {
-                model.addAttribute("errorMessage", "Username already exists");
+                model.addAttribute("errorMessage", "Nazwa uzytkownika juz istnieje");
                 return "auth/register";
             }
 
             // Check if email is available
             if (!userService.isEmailAvailable(email)) {
-                model.addAttribute("errorMessage", "Email already exists");
+                model.addAttribute("errorMessage", "Email juz istnieje");
                 return "auth/register";
             }
 
@@ -81,14 +81,14 @@ public class AuthController {
             User registeredUser = userService.registerUser(username, email, password, firstName, lastName);
 
             redirectAttributes.addFlashAttribute("successMessage",
-                    "Registration successful! You can now log in with your credentials.");
+                    "Rejestracja zakonczona sukcesem! Mozesz sie teraz zalogowac.");
 
             logger.info("Successfully registered user: {}", registeredUser.getUsername());
             return "redirect:/login";
 
         } catch (Exception e) {
             logger.error("Error during user registration", e);
-            model.addAttribute("errorMessage", "An error occurred during registration. Please try again.");
+            model.addAttribute("errorMessage", "Wystapil blad podczas rejestracji. Sprobuj ponownie.");
             return "auth/register";
         }
     }
@@ -109,19 +109,19 @@ public class AuthController {
             User user = userService.findByEmail(email).orElse(null);
 
             if (user == null) {
-                model.addAttribute("errorMessage", "No account found with this email address.");
+                model.addAttribute("errorMessage", "Nie znaleziono konta z tym adresem e-mail.");
                 return "auth/forgot-password";
             }
 
             redirectAttributes.addFlashAttribute("successMessage",
-                    "If an account with this email exists, you will receive password reset instructions.");
+                    "Jesli konto z tym adresem istnieje, otrzymasz instrukcje resetu hasla.");
 
             logger.info("Password reset requested for user: {}", user.getUsername());
             return "redirect:/login";
 
         } catch (Exception e) {
             logger.error("Error during forgot password process", e);
-            model.addAttribute("errorMessage", "An error occurred. Please try again.");
+            model.addAttribute("errorMessage", "Wystapil blad. Sprobuj ponownie.");
             return "auth/forgot-password";
         }
     }
@@ -131,11 +131,11 @@ public class AuthController {
                                 Model model) {
 
         if (token == null || token.trim().isEmpty()) {
-            model.addAttribute("errorMessage", "Invalid verification token.");
+            model.addAttribute("errorMessage", "Nieprawidlowy token weryfikacyjny.");
             return "auth/verification-error";
         }
 
-        model.addAttribute("successMessage", "Your account has been verified successfully!");
+        model.addAttribute("successMessage", "Twoje konto zostalo pomyslnie zweryfikowane!");
         return "auth/verification-success";
     }
 

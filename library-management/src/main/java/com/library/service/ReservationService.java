@@ -28,7 +28,7 @@ public class ReservationService {
 
     public Reservation reserveBook(User user, Book book) {
         if (reservationRepository.existsByUserAndBook(user, book)) {
-            throw new RuntimeException("Reservation already exists");
+            throw new RuntimeException("Rezerwacja juz istnieje");
         }
         Reservation reservation = new Reservation(user, book);
         return reservationRepository.save(reservation);
@@ -42,12 +42,12 @@ public class ReservationService {
     @Transactional(readOnly = true)
     public Reservation getReservation(Long id) {
         return reservationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono rezerwacji"));
     }
 
     public Reservation updateReservation(Long id, Reservation updated) {
         Reservation existing = reservationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono rezerwacji"));
         existing.setBook(updated.getBook());
         existing.setUser(updated.getUser());
         existing.setReservationDate(updated.getReservationDate());
@@ -60,9 +60,9 @@ public class ReservationService {
 
     public void cancelReservation(Long id, User user) {
         Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono rezerwacji"));
         if (!reservation.getUser().equals(user)) {
-            throw new RuntimeException("Unauthorized");
+            throw new RuntimeException("Brak uprawnien");
         }
         reservationRepository.delete(reservation);
     }
