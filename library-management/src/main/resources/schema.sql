@@ -17,3 +17,17 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+
+-- Books table for demo purposes
+CREATE TABLE IF NOT EXISTS books (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    description TEXT,
+    available BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+INSERT INTO books (title, author, description, available) VALUES
+    ('The Great Gatsby', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', true),
+    ('1984', 'George Orwell', 'Dystopian novel about totalitarianism.', true),
+    ('Dune', 'Frank Herbert', 'Science fiction epic on Arrakis.', false);

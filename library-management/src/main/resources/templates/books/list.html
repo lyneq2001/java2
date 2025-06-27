@@ -144,200 +144,23 @@
                 </div>
             </div>
 
-            <!-- Sample Books Grid -->
             <div class="row">
-                <!-- Sample Book 1 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card book-card h-100">
-                        <div class="book-cover bg-light d-flex align-items-center justify-content-center">
-                            <i class="bi bi-book display-4 text-muted"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">The Great Gatsby</h5>
-                            <p class="card-text text-muted">by F. Scott Fitzgerald</p>
-                            <p class="card-text">A classic American novel set in the Jazz Age, exploring themes of wealth, love, and the American Dream.</p>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success">Available</span>
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <small>(4.2)</small>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary btn-sm" sec:authorize="isAuthenticated()">
-                                    <i class="bi bi-download"></i> Rent Book
-                                </button>
-                                <a href="#" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View Details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-12" th:if="${#lists.isEmpty(books)}">
+                    <p class="text-muted">No books found.</p>
                 </div>
-
-                <!-- Sample Book 2 -->
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div th:each="book : ${books}" class="col-md-6 col-lg-4 mb-4">
                     <div class="card book-card h-100">
                         <div class="book-cover bg-light d-flex align-items-center justify-content-center">
                             <i class="bi bi-book display-4 text-muted"></i>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">1984</h5>
-                            <p class="card-text text-muted">by George Orwell</p>
-                            <p class="card-text">A dystopian social science fiction novel exploring surveillance, totalitarianism, and individual freedom.</p>
+                            <h5 class="card-title" th:text="${book.title}">Title</h5>
+                            <p class="card-text text-muted" th:text="'by ' + ${book.author}">Author</p>
+                            <p class="card-text" th:text="${book.description}">Description</p>
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-warning text-dark">Reserved</span>
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <small>(4.8)</small>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-warning btn-sm" sec:authorize="isAuthenticated()">
-                                    <i class="bi bi-bookmark"></i> Add to Queue
-                                </button>
-                                <a href="#" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View Details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sample Book 3 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card book-card h-100">
-                        <div class="book-cover bg-light d-flex align-items-center justify-content-center">
-                            <i class="bi bi-book display-4 text-muted"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Harry Potter and the Philosopher's Stone</h5>
-                            <p class="card-text text-muted">by J.K. Rowling</p>
-                            <p class="card-text">The first book in the magical Harry Potter series, following a young wizard's journey.</p>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success">Available</span>
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <small>(4.9)</small>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary btn-sm" sec:authorize="isAuthenticated()">
-                                    <i class="bi bi-download"></i> Rent Book
-                                </button>
-                                <a href="#" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View Details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sample Book 4 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card book-card h-100">
-                        <div class="book-cover bg-light d-flex align-items-center justify-content-center">
-                            <i class="bi bi-book display-4 text-muted"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">To Kill a Mockingbird</h5>
-                            <p class="card-text text-muted">by Harper Lee</p>
-                            <p class="card-text">A gripping tale of racial injustice and childhood innocence in the American South.</p>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success">Available</span>
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <small>(4.5)</small>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary btn-sm" sec:authorize="isAuthenticated()">
-                                    <i class="bi bi-download"></i> Rent Book
-                                </button>
-                                <a href="#" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View Details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sample Book 5 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card book-card h-100">
-                        <div class="book-cover bg-light d-flex align-items-center justify-content-center">
-                            <i class="bi bi-book display-4 text-muted"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Dune</h5>
-                            <p class="card-text text-muted">by Frank Herbert</p>
-                            <p class="card-text">A science fiction epic set on the desert planet Arrakis, featuring politics, religion, and ecology.</p>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-danger">Checked Out</span>
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <small>(4.3)</small>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-secondary btn-sm" disabled>
-                                    <i class="bi bi-clock"></i> Expected: Dec 15
-                                </button>
-                                <a href="#" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View Details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sample Book 6 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card book-card h-100">
-                        <div class="book-cover bg-light d-flex align-items-center justify-content-center">
-                            <i class="bi bi-book display-4 text-muted"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Pride and Prejudice</h5>
-                            <p class="card-text text-muted">by Jane Austen</p>
-                            <p class="card-text">A romantic novel exploring themes of love, reputation, and class in Georgian England.</p>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success">Available</span>
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <small>(4.1)</small>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary btn-sm" sec:authorize="isAuthenticated()">
-                                    <i class="bi bi-download"></i> Rent Book
-                                </button>
-                                <a href="#" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View Details
+                                <span class="badge" th:classappend="${book.available} ? 'bg-success' : 'bg-secondary'" th:text="${book.available} ? 'Available' : 'Unavailable'"></span>
+                                <a th:href="@{'/books/' + ${book.id} + '/details'}" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye"></i> Details
                                 </a>
                             </div>
                         </div>
