@@ -11,7 +11,7 @@ public class AdminDashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        model.addAttribute("pageTitle", "Admin Panel");
+        model.addAttribute("pageTitle", "Panel administracyjny");
         return "admin/dashboard";
     }
 }
