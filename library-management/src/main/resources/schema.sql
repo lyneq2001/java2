@@ -63,3 +63,12 @@ CREATE TABLE IF NOT EXISTS viewed_books (
     viewed_date TIMESTAMP NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS notifications (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id),
+    message VARCHAR(255) NOT NULL,
+    link VARCHAR(255),
+    is_read BOOLEAN NOT NULL DEFAULT FALSE,
+    created_date TIMESTAMP NOT NULL
+);
+

@@ -35,11 +35,6 @@ public class BookService {
     }
 
     public Book saveBook(Book book) {
-        if (book.getQuantity() <= 0) {
-            book.setAvailable(false);
-        } else {
-            book.setAvailable(true);
-        }
         return bookRepository.save(book);
     }
 
