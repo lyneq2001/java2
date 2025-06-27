@@ -73,6 +73,7 @@ public class HomeController {
 
         User user = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
+        model.addAttribute("books", bookService.getAllBooks());
         model.addAttribute("pageTitle", "Dashboard");
 
         if (user.isAdmin()) {
