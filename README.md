@@ -20,3 +20,4 @@ Projekt ma na celu stworzenie systemu zarządzania biblioteką online.
 - Ograniczanie liczby wypożyczeń na użytkownika.
 - Automatyczne powiadomienia e-mail o zbliżającym się terminie zwrotu.
 - **Nowość:** generowanie raportów PDF dla administratora z podsumowaniem bieżących wypożyczeń.
+- Możliwość usuwania recenzji przez administratora oraz autora komentarza.

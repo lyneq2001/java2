@@ -28,4 +28,27 @@ public class ReviewService {
     public java.util.List<Review> findByBook(Book book) {
         return reviewRepository.findByBookOrderByCreatedDateDesc(book);
     }
+
+    @Transactional(readOnly = true)
+    public java.util.List<Review> findAll() {
+        return reviewRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Review getReview(Long id) {
+        return reviewRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono recenzji"));
+    }
+
+    public void deleteReview(Long id) {
+        reviewRepository.deleteById(id);
+    }
+
+    public void deleteReview(Long id, User user) {
+        Review review = getReview(id);
+        if (!review.getUser().equals(user)) {
+            throw new RuntimeException("Brak uprawnien");
+        }
+        reviewRepository.delete(review);
+    }
 }
