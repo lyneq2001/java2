@@ -26,6 +26,10 @@
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
         </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" th:field="*{quantity}" min="0">
+        </div>
         <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="available" th:field="*{available}">
             <label class="form-check-label" for="available">Available</label>
