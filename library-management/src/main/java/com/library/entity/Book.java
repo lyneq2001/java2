@@ -24,15 +24,19 @@ public class Book {
     private String description;
 
     @Column(nullable = false)
+    private int quantity = 1;
+
+    @Column(nullable = false)
     private boolean available = true;
 
     public Book() {}
 
-    public Book(String title, String author, String description, boolean available) {
+    public Book(String title, String author, String description, boolean available, int quantity) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.available = available;
+        this.quantity = quantity;
     }
 
     public Long getId() { return id; }
@@ -46,6 +50,9 @@ public class Book {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
     public boolean isAvailable() { return available; }
     public void setAvailable(boolean available) { this.available = available; }

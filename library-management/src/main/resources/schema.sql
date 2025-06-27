@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS books (
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
     description TEXT,
+    quantity INTEGER NOT NULL DEFAULT 1,
     available BOOLEAN NOT NULL DEFAULT TRUE
 );
 
