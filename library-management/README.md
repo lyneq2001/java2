@@ -14,7 +14,7 @@ By default the application connects to a PostgreSQL database `librarydb` on `loc
 
 ## Database schema
 
-The file `database-schema.sql` contains SQL statements for creating the required database tables. Hibernate can also create the schema automatically at runtime.
+The schema is now initialized automatically from `src/main/resources/schema.sql` when the application starts. Hibernate will execute this script to create any missing tables.
 
 ## Demo credentials
 
