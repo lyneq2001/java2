@@ -76,11 +76,7 @@ public class HomeController {
         model.addAttribute("books", bookService.getAllBooks());
         model.addAttribute("pageTitle", "Dashboard");
 
-        if (user.isAdmin()) {
-            return "redirect:/admin/dashboard";
-        } else {
-            return "dashboard";
-        }
+        return "dashboard";
     }
 
     @GetMapping("/access-denied")
