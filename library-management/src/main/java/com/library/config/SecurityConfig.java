@@ -1,4 +1,4 @@
-﻿package com.library.config;
+package com.library.config;
 
 import com.library.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

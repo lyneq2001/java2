@@ -1,4 +1,4 @@
-﻿package com.library.entity;
+package com.library.entity;
 
 public enum Role {
     USER, ADMIN
