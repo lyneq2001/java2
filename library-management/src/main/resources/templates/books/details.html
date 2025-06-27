@@ -55,13 +55,13 @@
         <h4>Recenzje</h4>
         <div th:each="rev : ${reviews}" class="mb-3 border-bottom pb-2">
             <div>
-                <strong th:text="rev.user.username">User</strong>
+                <strong th:text="${rev.user.username}">User</strong>
                 <small class="text-muted ms-2" th:text="${#temporals.format(rev.createdDate, 'yyyy-MM-dd HH:mm')}">date</small>
             </div>
             <div>
-                <span class="me-2" th:text="'Ocena: ' + rev.rating">Rating</span>
+                <span class="me-2" th:text="'Ocena: ' + ${rev.rating}">Rating</span>
             </div>
-            <p th:text="rev.comment">Comment</p>
+            <p th:text="${rev.comment}">Comment</p>
         </div>
     </div>
     <a th:href="@{/books}" class="btn btn-secondary">Powrót do listy</a>
