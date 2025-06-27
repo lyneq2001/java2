@@ -2,8 +2,12 @@ package com.library.controller;
 
 import com.library.entity.User;
 import com.library.entity.Book;
-import com.library.service.UserService;
 import com.library.service.BookService;
+import com.library.service.ReservationService;
+import com.library.service.RentalService;
+import com.library.service.ReviewService;
+import com.library.service.UserService;
+import com.library.service.ViewedBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,18 @@ public class HomeController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private RentalService rentalService;
+
+    @Autowired
+    private ReservationService reservationService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private ViewedBookService viewedBookService;
 
     @GetMapping("/")
     public String home() {
@@ -50,6 +66,7 @@ public class HomeController {
             User user = userService.findByUsername(username).orElse(null);
             if (user != null) {
                 model.addAttribute("currentUser", user);
+                viewedBookService.recordView(user, book);
             }
         }
 
@@ -75,6 +92,13 @@ public class HomeController {
         model.addAttribute("user", user);
         model.addAttribute("books", bookService.getAllBooks());
         model.addAttribute("pageTitle", "Dashboard");
+
+        model.addAttribute("activeRentalsCount", rentalService.countActiveRentals(user));
+        model.addAttribute("reservationsCount", reservationService.countByUser(user));
+        model.addAttribute("reviewsCount", reviewService.countByUser(user));
+        model.addAttribute("overdueCount", rentalService.countOverdueRentals(user));
+        model.addAttribute("currentRentals", rentalService.getCurrentRentals(user));
+        model.addAttribute("recentBooks", viewedBookService.getRecentViews(user));
 
         return "dashboard";
     }

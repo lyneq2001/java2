@@ -27,3 +27,35 @@ CREATE TABLE IF NOT EXISTS books (
     available BOOLEAN NOT NULL DEFAULT TRUE
 );
 
+CREATE TABLE IF NOT EXISTS rentals (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id),
+    book_id BIGINT NOT NULL REFERENCES books(id),
+    rented_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    returned_date DATE
+);
+
+CREATE TABLE IF NOT EXISTS reservations (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id),
+    book_id BIGINT NOT NULL REFERENCES books(id),
+    reservation_date DATE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id),
+    book_id BIGINT NOT NULL REFERENCES books(id),
+    rating INTEGER NOT NULL,
+    comment TEXT,
+    created_date TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS viewed_books (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id),
+    book_id BIGINT NOT NULL REFERENCES books(id),
+    viewed_date TIMESTAMP NOT NULL
+);
+

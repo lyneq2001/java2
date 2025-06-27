@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <i class="bi bi-book-half feature-icon text-primary"></i>
                     <h5 class="card-title">Active Rentals</h5>
-                    <h2 class="text-primary mb-0">3</h2>
+                    <h2 class="text-primary mb-0" th:text="${activeRentalsCount}">0</h2>
                     <small class="text-muted">of 5 max</small>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <i class="bi bi-bookmark-check feature-icon text-warning"></i>
                     <h5 class="card-title">Reservations</h5>
-                    <h2 class="text-warning mb-0">1</h2>
+                    <h2 class="text-warning mb-0" th:text="${reservationsCount}">0</h2>
                     <small class="text-muted">pending</small>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 <div class="card-body">
                     <i class="bi bi-star-half feature-icon text-info"></i>
                     <h5 class="card-title">Reviews</h5>
-                    <h2 class="text-info mb-0">12</h2>
+                    <h2 class="text-info mb-0" th:text="${reviewsCount}">0</h2>
                     <small class="text-muted">written</small>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                 <div class="card-body">
                     <i class="bi bi-exclamation-triangle feature-icon text-danger"></i>
                     <h5 class="card-title">Overdue</h5>
-                    <h2 class="text-danger mb-0">0</h2>
+                    <h2 class="text-danger mb-0" th:text="${overdueCount}">0</h2>
                     <small class="text-muted">books</small>
                 </div>
             </div>
@@ -136,41 +136,19 @@
             </div>
         </div>
 
-        <!-- Recent Activity -->
+        <!-- Recently Viewed Books -->
         <div class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-clock-history"></i> Recent Activity</h5>
+                    <h5 class="mb-0"><i class="bi bi-clock-history"></i> Ostatnio przeglądane książki</h5>
                 </div>
                 <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        <div class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
+                    <div class="list-group list-group-flush" th:if="${recentBooks}">
+                        <div class="list-group-item d-flex justify-content-between align-items-start border-0 px-0" th:each="v : ${recentBooks}">
                             <div class="me-auto">
-                                <div class="fw-bold">Rented "1984"</div>
-                                <small class="text-muted">Due: December 15, 2024</small>
+                                <div class="fw-bold" th:text="${v.book.title}">Title</div>
+                                <small class="text-muted" th:text="${#dates.format(v.viewedDate, 'yyyy-MM-dd HH:mm')}">date</small>
                             </div>
-                            <span class="badge bg-primary rounded-pill">Active</span>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
-                            <div class="me-auto">
-                                <div class="fw-bold">Reviewed "Harry Potter"</div>
-                                <small class="text-muted">Rated 5 stars</small>
-                            </div>
-                            <span class="badge bg-warning rounded-pill">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
-                            <div class="me-auto">
-                                <div class="fw-bold">Reserved "Dune"</div>
-                                <small class="text-muted">Position #1 in queue</small>
-                            </div>
-                            <span class="badge bg-success rounded-pill">Next</span>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
-                            <div class="me-auto">
-                                <div class="fw-bold">Returned "The Great Gatsby"</div>
-                                <small class="text-muted">3 days ago</small>
-                            </div>
-                            <span class="badge bg-secondary rounded-pill">Returned</span>
                         </div>
                     </div>
                 </div>
@@ -198,48 +176,16 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
+                            <tbody th:if="${currentRentals}">
+                            <tr th:each="r : ${currentRentals}">
+                                <td><strong th:text="${r.book.title}">Title</strong></td>
+                                <td th:text="${r.book.author}">Author</td>
+                                <td th:text="${#dates.format(r.rentedDate, 'yyyy-MM-dd')}">date</td>
+                                <td th:text="${#dates.format(r.dueDate, 'yyyy-MM-dd')}">date</td>
                                 <td>
-                                    <strong>1984</strong>
+                                    <span th:classappend="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'badge bg-danger' : 'badge bg-success'" th:text="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'Overdue' : 'On Time'">Status</span>
                                 </td>
-                                <td>George Orwell</td>
-                                <td>Dec 1, 2024</td>
-                                <td>Dec 15, 2024</td>
-                                <td><span class="badge bg-success">On Time</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-arrow-clockwise"></i> Extend
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>To Kill a Mockingbird</strong>
-                                </td>
-                                <td>Harper Lee</td>
-                                <td>Nov 28, 2024</td>
-                                <td>Dec 12, 2024</td>
-                                <td><span class="badge bg-success">On Time</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-arrow-clockwise"></i> Extend
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Harry Potter</strong>
-                                </td>
-                                <td>J.K. Rowling</td>
-                                <td>Nov 25, 2024</td>
-                                <td>Dec 9, 2024</td>
-                                <td><span class="badge bg-success">On Time</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-arrow-clockwise"></i> Extend
-                                    </button>
-                                </td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
