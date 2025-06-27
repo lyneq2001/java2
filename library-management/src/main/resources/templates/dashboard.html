@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Library Management</title>
+    <title>Panel użytkownika - Biblioteka</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet">
@@ -20,12 +20,12 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <h1 class="display-6">
-                        <i class="bi bi-speedometer2"></i> Dashboard
+                        <i class="bi bi-speedometer2"></i> Panel użytkownika
                     </h1>
-                    <p class="lead text-muted">Welcome back, <span sec:authentication="name">User</span>!</p>
+                    <p class="lead text-muted">Witamy ponownie, <span sec:authentication="name">Użytkowniku</span>!</p>
                 </div>
                 <div class="text-end">
-                    <small class="text-muted">Last login: Today at 10:30 AM</small>
+                    <small class="text-muted">Ostatnie logowanie: dzisiaj o 10:30</small>
                 </div>
             </div>
         </div>
@@ -36,12 +36,12 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-person"></i> Account Information</h5>
+                    <h5 class="mb-0"><i class="bi bi-person"></i> Informacje o koncie</h5>
                 </div>
                 <div class="card-body">
-                    <p><strong>Username:</strong> <span th:text="${user.username}">user</span></p>
+                    <p><strong>Nazwa użytkownika:</strong> <span th:text="${user.username}">user</span></p>
                     <p><strong>Email:</strong> <span th:text="${user.email}">email</span></p>
-                    <p><strong>Role:</strong> <span th:text="${user.role}">role</span></p>
+                    <p><strong>Rola:</strong> <span th:text="${user.role}">role</span></p>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-book"></i> Available Books</h5>
+                    <h5 class="mb-0"><i class="bi bi-book"></i> Dostępne książki</h5>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush" th:if="${books}" style="max-height: 200px; overflow-y: auto;">
@@ -70,9 +70,9 @@
             <div class="card text-center h-100">
                 <div class="card-body">
                     <i class="bi bi-book-half feature-icon text-primary"></i>
-                    <h5 class="card-title">Active Rentals</h5>
+                    <h5 class="card-title">Aktywne wypożyczenia</h5>
                     <h2 class="text-primary mb-0" th:text="${activeRentalsCount}">0</h2>
-                    <small class="text-muted">of 5 max</small>
+                    <small class="text-muted">z maks. 5</small>
                 </div>
             </div>
         </div>
@@ -81,9 +81,9 @@
             <div class="card text-center h-100">
                 <div class="card-body">
                     <i class="bi bi-bookmark-check feature-icon text-warning"></i>
-                    <h5 class="card-title">Reservations</h5>
+                    <h5 class="card-title">Rezerwacje</h5>
                     <h2 class="text-warning mb-0" th:text="${reservationsCount}">0</h2>
-                    <small class="text-muted">pending</small>
+                    <small class="text-muted">oczekujących</small>
                 </div>
             </div>
         </div>
@@ -92,9 +92,9 @@
             <div class="card text-center h-100">
                 <div class="card-body">
                     <i class="bi bi-star-half feature-icon text-info"></i>
-                    <h5 class="card-title">Reviews</h5>
+                    <h5 class="card-title">Recenzje</h5>
                     <h2 class="text-info mb-0" th:text="${reviewsCount}">0</h2>
-                    <small class="text-muted">written</small>
+                    <small class="text-muted">napisanych</small>
                 </div>
             </div>
         </div>
@@ -103,9 +103,9 @@
             <div class="card text-center h-100">
                 <div class="card-body">
                     <i class="bi bi-exclamation-triangle feature-icon text-danger"></i>
-                    <h5 class="card-title">Overdue</h5>
+                    <h5 class="card-title">Po terminie</h5>
                     <h2 class="text-danger mb-0" th:text="${overdueCount}">0</h2>
-                    <small class="text-muted">books</small>
+                    <small class="text-muted">książek</small>
                 </div>
             </div>
         </div>
@@ -117,21 +117,21 @@
         <div class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-lightning-charge"></i> Quick Actions</h5>
+                    <h5 class="mb-0"><i class="bi bi-lightning-charge"></i> Szybkie akcje</h5>
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-3">
                         <a th:href="@{/books}" class="btn btn-primary">
-                            <i class="bi bi-search"></i> Browse Books
+                            <i class="bi bi-search"></i> Przeglądaj książki
                         </a>
                         <a th:href="@{/profile}" class="btn btn-outline-primary">
-                            <i class="bi bi-person-gear"></i> Update Profile
+                            <i class="bi bi-person-gear"></i> Aktualizuj profil
                         </a>
                         <a th:href="@{/rentals}" class="btn btn-outline-info">
-                            <i class="bi bi-clock-history"></i> View Rental History
+                            <i class="bi bi-clock-history"></i> Historia wypożyczeń
                         </a>
                         <a th:href="@{/reservations}" class="btn btn-outline-success">
-                            <i class="bi bi-bookmark-plus"></i> Manage Reservations
+                            <i class="bi bi-bookmark-plus"></i> Zarządzaj rezerwacjami
                         </a>
                     </div>
                 </div>
@@ -163,19 +163,19 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0"><i class="bi bi-book-half"></i> Current Rentals</h5>
+                    <h5 class="mb-0"><i class="bi bi-book-half"></i> Bieżące wypożyczenia</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>Book</th>
-                                <th>Author</th>
-                                <th>Rented Date</th>
-                                <th>Due Date</th>
+                                <th>Książka</th>
+                                <th>Autor</th>
+                                <th>Data wypożyczenia</th>
+                                <th>Termin zwrotu</th>
                                 <th>Status</th>
-                                <th>Actions</th>
+                                <th>Akcje</th>
                             </tr>
                             </thead>
                             <tbody th:if="${currentRentals}">
@@ -185,7 +185,7 @@
                                 <td th:text="${#temporals.format(r.rentedDate, 'yyyy-MM-dd')}">date</td>
                                 <td th:text="${#temporals.format(r.dueDate, 'yyyy-MM-dd')}">date</td>
                                 <td>
-                                    <span th:classappend="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'badge bg-danger' : 'badge bg-success'" th:text="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'Overdue' : 'On Time'">Status</span>
+                                    <span th:classappend="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'badge bg-danger' : 'badge bg-success'" th:text="${r.dueDate.isBefore(T(java.time.LocalDate).now())} ? 'Po terminie' : 'W terminie'">Status</span>
                                 </td>
                                 <td></td>
                             </tr>
@@ -203,11 +203,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h5><i class="bi bi-book"></i> Library Management System</h5>
-                <p class="mb-0">Manage your library resources efficiently.</p>
+                <h5><i class="bi bi-book"></i> System zarządzania biblioteką</h5>
+                <p class="mb-0">Zarządzaj zasobami biblioteki skutecznie.</p>
             </div>
             <div class="col-md-6 text-end">
-                <small>&copy; 2024 Library Management System. All rights reserved.</small>
+                <small>&copy; 2024 System zarządzania biblioteką. Wszelkie prawa zastrzeżone.</small>
             </div>
         </div>
     </div>

@@ -51,7 +51,7 @@ public class HomeController {
     public String books(@RequestParam(required = false) String search, Model model) {
         model.addAttribute("books", bookService.searchBooks(search));
         model.addAttribute("search", search);
-        model.addAttribute("pageTitle", "Books");
+        model.addAttribute("pageTitle", "Książki");
         return "books/list";
     }
 
@@ -59,7 +59,7 @@ public class HomeController {
     public String bookDetails(@PathVariable Long id, Model model, Authentication authentication) {
         Book book = bookService.getBook(id);
         model.addAttribute("book", book);
-        model.addAttribute("pageTitle", "Book Details");
+        model.addAttribute("pageTitle", "Szczegóły książki");
         model.addAttribute("reviews", reviewService.findByBook(book));
 
         if (authentication != null && authentication.isAuthenticated()) {
@@ -78,7 +78,7 @@ public class HomeController {
     public String searchBooks(@RequestParam String q, Model model) {
         model.addAttribute("books", bookService.searchBooks(q));
         model.addAttribute("search", q);
-        model.addAttribute("pageTitle", "Search Results");
+        model.addAttribute("pageTitle", "Wyniki wyszukiwania");
 
         return "books/list";
     }
@@ -92,7 +92,7 @@ public class HomeController {
         User user = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
         model.addAttribute("books", bookService.getAllBooks());
-        model.addAttribute("pageTitle", "Dashboard");
+        model.addAttribute("pageTitle", "Panel użytkownika");
 
         model.addAttribute("activeRentalsCount", rentalService.countActiveRentals(user));
         model.addAttribute("reservationsCount", reservationService.countByUser(user));
