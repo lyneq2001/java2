@@ -62,7 +62,7 @@
                 <span class="me-2" th:text="'Ocena: ' + ${rev.rating}">Rating</span>
             </div>
             <p th:text="${rev.comment}">Comment</p>
-            <div sec:authorize="hasRole('ADMIN') or #authentication?.name == ${rev.user.username}">
+            <div sec:authorize="hasRole('ADMIN') or #authentication?.name == rev.user.username">
                 <form th:action="@{'/reviews/' + ${rev.id} + '/delete'}" method="post" class="d-inline">
                     <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
                 </form>
