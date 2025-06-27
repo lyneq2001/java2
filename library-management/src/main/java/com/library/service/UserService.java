@@ -99,4 +99,8 @@ public class UserService {
     public boolean isEmailAvailable(String email) {
         return !userRepository.existsByEmail(email);
     }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }

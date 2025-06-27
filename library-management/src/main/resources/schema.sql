@@ -27,7 +27,3 @@ CREATE TABLE IF NOT EXISTS books (
     available BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-INSERT INTO books (title, author, description, available) VALUES
-    ('The Great Gatsby', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', true),
-    ('1984', 'George Orwell', 'Dystopian novel about totalitarianism.', true),
-    ('Dune', 'Frank Herbert', 'Science fiction epic on Arrakis.', false);
