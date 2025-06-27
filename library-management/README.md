@@ -14,7 +14,7 @@ By default the application connects to a PostgreSQL database `librarydb` on `loc
 
 ## Database schema
 
-The schema is now initialized automatically from `src/main/resources/schema.sql` when the application starts. Hibernate will execute this script to create any missing tables.
+The schema is initialized automatically from `src/main/resources/schema.sql` when the application starts. This script creates the necessary tables and inserts a few example books.
 
 ## Demo credentials
 

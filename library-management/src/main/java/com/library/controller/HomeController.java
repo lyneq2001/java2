@@ -1,7 +1,9 @@
 package com.library.controller;
 
 import com.library.entity.User;
+import com.library.entity.Book;
 import com.library.service.UserService;
+import com.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BookService bookService;
+
     @GetMapping("/")
     public String home() {
         return "redirect:/books";
@@ -27,25 +32,17 @@ public class HomeController {
     }
 
     @GetMapping("/books")
-    public String books(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "12") int size,
-            @RequestParam(defaultValue = "title") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortDir,
-            @RequestParam(required = false) String search,
-            @RequestParam(required = false) Long categoryId,
-            @RequestParam(defaultValue = "false") boolean availableOnly,
-            Model model) {
-
+    public String books(@RequestParam(required = false) String search, Model model) {
+        model.addAttribute("books", bookService.searchBooks(search));
         model.addAttribute("search", search);
-        model.addAttribute("availableOnly", availableOnly);
         model.addAttribute("pageTitle", "Books");
-
         return "books/list";
     }
 
     @GetMapping("/books/{id}/details")
     public String bookDetails(@PathVariable Long id, Model model, Authentication authentication) {
+        Book book = bookService.getBook(id);
+        model.addAttribute("book", book);
         model.addAttribute("pageTitle", "Book Details");
 
         if (authentication != null && authentication.isAuthenticated()) {
@@ -60,17 +57,12 @@ public class HomeController {
     }
 
     @GetMapping("/books/search")
-    public String searchBooks(
-            @RequestParam String q,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "12") int size,
-            Model model) {
-
-        model.addAttribute("searchQuery", q);
-        model.addAttribute("currentPage", page);
+    public String searchBooks(@RequestParam String q, Model model) {
+        model.addAttribute("books", bookService.searchBooks(q));
+        model.addAttribute("search", q);
         model.addAttribute("pageTitle", "Search Results");
 
-        return "books/search-results";
+        return "books/list";
     }
 
     @GetMapping("/dashboard")
