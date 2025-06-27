@@ -28,6 +28,9 @@ CREATE TABLE IF NOT EXISTS books (
     available BOOLEAN NOT NULL DEFAULT TRUE
 );
 
+-- Ensure quantity column exists for older installations
+ALTER TABLE books ADD COLUMN IF NOT EXISTS quantity INTEGER NOT NULL DEFAULT 1;
+
 CREATE TABLE IF NOT EXISTS rentals (
     id SERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL REFERENCES users(id),
